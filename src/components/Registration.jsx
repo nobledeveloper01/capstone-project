@@ -183,7 +183,7 @@ const Registration = ({ showModal, setShowModal }) => {
           onClick={handleCloseModal}
         >
           <div
-            className="bg-white p-8 rounded-xl shadow-md w-3/3 md:w-106 max-h-full overflow-y-auto"
+            className="bg-white justify-center items-center p-8 rounded-xl shadow-md   max-h-full overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <h1 className="text-4xl font-bold mb-2 text-center text-green-600">
@@ -200,7 +200,7 @@ const Registration = ({ showModal, setShowModal }) => {
             </button>
             {/* Your form inputs and elements go here */}
             <form onSubmit={handleRegistration}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+              <div className=" grid-cols-1 gap-4 mb-4">
                 <div className="mb-4">
                   <label
                     htmlFor="firstName"
@@ -416,7 +416,7 @@ const Registration = ({ showModal, setShowModal }) => {
                   </select>
                 </div>
                 {/* Address Input */}
-                <div className="col-span-3">
+                <div className="col-span-3 mb-3">
                   <label
                     htmlFor="address"
                     className="block text-gray-700 font-semibold mb-1"
@@ -433,7 +433,7 @@ const Registration = ({ showModal, setShowModal }) => {
                     required
                   />
                 </div>
-                <div className="flex flex-column justify-between">
+                <div className="flex flex-column justify-between mb-3">
                   {/* Area Code Input */}
                   <div className="w-1/7">
                     <label
@@ -467,7 +467,7 @@ const Registration = ({ showModal, setShowModal }) => {
                   </div>
                 </div>
 
-                <div className="col-span-1">
+                <div className="col-span-1 mb-2">
                   <label
                     htmlFor="farmingType"
                     className="block text-gray-700 font-semibold mb-1"
@@ -490,7 +490,7 @@ const Registration = ({ showModal, setShowModal }) => {
                     {/* Add more farming types here */}
                   </select>
                 </div>
-                <div className="col-span-1">
+                <div className="col-span-1 mb-2">
                   <label
                     htmlFor="identificationType"
                     className="block text-gray-700 font-semibold mb-1"
@@ -515,7 +515,7 @@ const Registration = ({ showModal, setShowModal }) => {
                     {/* Add more means of identification options here */}
                   </select>
                 </div>
-                <div className="col-span-1">
+                <div className="col-span-1 mb-3">
                   <label
                     htmlFor="fileUpload"
                     className="block text-gray-700 font-semibold mb-1"
@@ -563,8 +563,8 @@ const Registration = ({ showModal, setShowModal }) => {
                 </div>
               </div>
             </form>
-            <div className="flex justify-between mt-8">
-              <p className="text-gray-600">
+            <div className="flex justify-between item-center mt-8">
+              <p className="text-gray-600 mt-3">
                 Already have an Account?
                 <Link to="/signin" className="text-blue-500">
                   Sign In
