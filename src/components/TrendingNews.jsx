@@ -122,7 +122,7 @@ const TrendingNews = () => {
           <button
             onClick={handleNextPage}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md"
+            className="px-4 py-2 bg-green-600 text-white rounded-md"
           >
             Next
           </button>

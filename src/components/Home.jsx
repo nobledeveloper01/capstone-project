@@ -27,6 +27,8 @@ import livestocksImage from "../assets/images/livestocks.jpg";
 import grainsImage from "../assets/images/grains.jpg";
 import tubersImage from "../assets/images/tubers.jpg";
 import TrendingNews from "./TrendingNews";
+import Newsletter from "./Newsletter";
+import Footer from "./Footer";
 
 const Home = () => {
   // Replace these with your actual user data (profilePicture and userName)
@@ -433,6 +435,8 @@ const Home = () => {
           </div>
         </div>
         <TrendingNews />
+        < Newsletter />
+        <Footer />
       </div>
     );
   };
