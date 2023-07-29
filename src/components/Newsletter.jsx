@@ -30,7 +30,7 @@ const Newsletter = ({ height = "300px" }) => {
           agriculture. Join our newsletter and be part of the AgricConnect
           community!
         </p>
-        <form onSubmit={handleSubmit} className="flex items-center">
+        <form onSubmit={handleSubmit} className="flex md:flex-row items-center">
           <input
             type="email"
             placeholder="Enter your email"
@@ -41,7 +41,7 @@ const Newsletter = ({ height = "300px" }) => {
           />
           <button
             type="submit"
-            className="px-4 py-2 bg-green-700 text-white font-semibold rounded-r-md hover:bg-gray-700 focus:outline-none"
+            className=" flex flex-row px-4 py-2 bg-green-700 text-white font-semibold rounded-r-md hover:bg-gray-700 focus:outline-none"
           >
             Subscribe
           </button>

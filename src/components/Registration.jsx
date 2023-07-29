@@ -5,8 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 
 const Registration = ({ showModal, setShowModal }) => {
   const navigate = useNavigate();
@@ -84,7 +83,7 @@ const Registration = ({ showModal, setShowModal }) => {
 
     if (isRegistrationSuccessful) {
       // Show toast notification
-      toast.success("Registration completed successfully!", {
+    alert("Registration completed successfully!", {
         onClose: () => {
           // Close the registration modal
           // Navigate back to sign-in
@@ -584,9 +583,6 @@ const Registration = ({ showModal, setShowModal }) => {
           </div>
         </div>
       )}
-      <div>
-      <ToastContainer />
-      </div>
     </>
   );
 };
