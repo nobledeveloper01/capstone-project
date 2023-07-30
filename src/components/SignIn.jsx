@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle, faFacebook, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import signinImage from "../assets/images/sign in image.png";
 import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const SignInPage = () => {
   const navigate = useNavigate();
@@ -11,13 +12,31 @@ const SignInPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
+
     if (!email || !password ) {
       setError("pls fill all fields");
       return;
 
   }
+
+  const loginData = { email, password };
+    try {
+      const response = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      });
+  
+  const data = await response.json();
+      console.log(data); // Handle the response from the backend
+    } catch (error) {
+      console.error('Error logging in:', error);
+    }
+
     // Perform your sign-in logic with email and password
     console.log("Submitted data:", email, password);
   };
@@ -26,7 +45,8 @@ const SignInPage = () => {
     // Function to check if the user exists and the password is correct
     const checkUserAndPassword = async () => {
       try {
-        const response = await axios.get("API_ENDPOINT_URL");
+        const response = await axios.post('http://localhost:5000/api/login', { email, password });
+        console.log(response.data); // Handle the response from the backend
         const existingUsers = response.data.users;
         const user = existingUsers.find((user) => user.username === email);
         
@@ -140,6 +160,6 @@ const SignInPage = () => {
       </aside>
     </main>
   );
-};
+}
 
 export default SignInPage;

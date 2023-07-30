@@ -34,7 +34,7 @@ const Registration = ({ showModal, setShowModal }) => {
   const [error, setError] = useState("");
 
   // Function to handle form submission
-  const handleRegistration = (e) => {
+  const handleRegistration = async (e) => {
     e.preventDefault();
 
     if (
@@ -59,6 +59,14 @@ const Registration = ({ showModal, setShowModal }) => {
     }
 
     // Implement your form submission logic here, including API endpoint calls
+    try {
+    const userData = { firstName, lastName, otherName, email, dob, gender, nationality, nationalities, lgas, selectedState, selectedLga, address, areaCode, phoneNumber, farmingType, identificationType, file, userCategory, password };
+    const response = await axios.post('http://localhost:5000/api/register', userData);
+    setMessage(response.data.message);
+  } catch (error) {
+    console.error('Error registering user:', error);
+  };    
+
     // After successful submission, you can close the modal
     setShowModal(false);
     // Reset the form inputs if needed
