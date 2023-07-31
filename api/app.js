@@ -9,18 +9,6 @@ const port = 5000;
 app.use(bodyParser.json());
 app.use(cors());
 
-// // Alternatively, you can specify specific origins to allow
-// // Example: Allow requests from http://localhost:3000 (your ReactJS app)
-// const allowedOrigins = ['http://localhost:4000'];
-// app.use(cors({
-//   origin: function (origin, callback) {
-//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-// }));
 
 // Body parser middleware
 app.use(express.json());
@@ -32,14 +20,13 @@ const db = require('./db'); // Assuming db.js is in the same folder as app.js
 const register = require('./register');
 app.use('/api/register', register);
 
-// Import the 'register' API endpoint
+// Import the User Validation API endpoint
 const users = require('./users');
 app.use('/api/users', users);
 
 // Import the 'login' API endpoint
 const login = require('./login'); // Adjust the path if necessary
 app.use('/api/login', login);
-
 
 // POST endpoint for user login
 app.post('/api/login', (req, res) => {
