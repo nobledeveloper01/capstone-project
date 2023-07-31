@@ -10,20 +10,20 @@ router.post('/', async (req, res) => {
     // Validate data here (e.g., check for required fields)
 
     // Find the user by email in the MongoDB database
-    const user = Users.findOne({ email });
+    const users = Users.findOne({ email });
 
     // Check if the user exists
-    if (!user) {
+    if (!users) {
       return res.status(404).json({ success: false, message: 'User not found.' });
     }
 
     // Check if the password matches the one stored in the database (you should use a secure password hashing mechanism like bcrypt or Argon2 for production)
-    if (user.password !== password) {
-      return res.status(401).json({ success: false, message: 'Invalid password.' });
+    if (users.password !== password) {
+      return res.status(401).json({ success: false, message: 'You Supplied an Invalid password.' });
     }
 
     // If the email and password match, the user is authenticated
-    res.json({ success: true, message: 'Login successful!', user });
+    res.json({ success: true, message: 'Login successful!', users });
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ success: false, message: 'Failed to login.' });

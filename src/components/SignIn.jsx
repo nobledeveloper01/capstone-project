@@ -47,21 +47,21 @@ const SignInPage = () => {
       try {
         const response = await axios.post('http://localhost:5000/api/login', { email, password });
         console.log(response.data); // Handle the response from the backend
-        const existingUsers = response.data.users;
-        const user = existingUsers.find((user) => user.username === email);
+        const existingUser = response.data.users;
+        const users = existingUser.find((users) => users.email === email);
         
-        if (!user) {
+        if (!users) {
           setError("User does not exist.");
           return;
         }
 
-        if (user.password !== password) {
+        if (users.password !== password) {
           setError("Username or password is incorrect.");
           return;
         }
 
         // If everything is correct, you can call the onLogin function and navigate to the desired route
-        onLogin(user);
+        onLogin(users);
         navigate("/Dashboard");
       } catch (error) {
         console.error("Error fetching user data:", error);

@@ -35,13 +35,10 @@ export default function SignUpPage() {
 
     try {
       // Perform your signup logic with email and password
-      const response = await axios.post("http://localhost:5000/api/users", {
-        email,
-        password,
-      });
+      const response = await axios.post('http://localhost:5000/api/users', { email, password });
       console.log("Signup successful!", response.data);
       // Navigate to another page on successful signup
-      navigate("/Registration");
+      navigate(Registration);
     } catch (error) {
       setError("Signup failed. Please try again.");
       console.error(error);
