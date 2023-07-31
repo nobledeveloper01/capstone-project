@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('./user'); // Assuming you have a User model for MongoDB
+const User = require('./validate'); // Assuming you have a User model for MongoDB
 
 // Route to handle user login
 router.post('/', async (req, res) => {
