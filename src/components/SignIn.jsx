@@ -62,7 +62,7 @@ const SignInPage = () => {
 
         // If everything is correct, you can call the onLogin function and navigate to the desired route
         onLogin(user);
-        navigate("/Dashboard");
+        navigate("/Home");
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
