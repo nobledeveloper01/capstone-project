@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('./user');
 
 router.post('/', async (req, res) => {
-  const { firstName, lastName, otherName, email, dob, gender, nationality, nationalities, lgas, selectedState, selectedLga, address, areaCode, phoneNumber, farmingType, identificationType, file, userCategory, password } = req.body;
+  const { firstName, lastName, otherName, email, dob, gender, nationality, nationalities, lgas, selectedState, selectedLga, address, areaCode, phoneNumber, farmingType, identificationType, file, userCategory } = req.body;
 
   try {
     // Check if the user already exists
@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     }
 
     // Create a new user
-    const newUser = new User({ username, email, password });
+    const newUser = new User({ firstName, lastName, otherName, email, dob, gender, nationality, nationalities, lgas, selectedState, selectedLga, address, areaCode, phoneNumber, farmingType, identificationType, file, userCategory });
     await newUser.save();
 
     res.json({ message: 'Registration successful.' });

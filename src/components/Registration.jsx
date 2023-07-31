@@ -60,7 +60,7 @@ const Registration = ({ showModal, setShowModal }) => {
 
     // Implement your form submission logic here, including API endpoint calls
     try {
-    const userData = { firstName, lastName, otherName, email, dob, gender, nationality, nationalities, lgas, selectedState, selectedLga, address, areaCode, phoneNumber, farmingType, identificationType, file, userCategory, password };
+    const userData = { firstName, lastName, otherName, email, dob, gender, nationality, nationalities, lgas, selectedState, selectedLga, address, areaCode, phoneNumber, farmingType, identificationType, file, userCategory };
     const response = await axios.post('http://localhost:5000/api/register', userData);
     setMessage(response.data.message);
   } catch (error) {
