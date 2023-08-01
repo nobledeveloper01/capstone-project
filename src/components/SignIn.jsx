@@ -23,8 +23,8 @@ const SignInPage = () => {
 
   const loginData = { email, password };
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
+      const response = await axios.post ('http://localhost:5000/api/login', {
+       
         headers: {
           'Content-Type': 'application/json',
         },
@@ -37,8 +37,8 @@ const SignInPage = () => {
       console.error('Error logging in:', error);
     }
 
-    // Perform your sign-in logic with email and password
-    console.log("Submitted data:", email, password);
+    
+    
   };
   
   useEffect(() => {
@@ -62,7 +62,7 @@ const SignInPage = () => {
 
         // If everything is correct, you can call the onLogin function and navigate to the desired route
         onLogin(user);
-        navigate("/home/*");
+        navigate("/home");
       } catch (error) {
         console.error("Error fetching user data:", error);
       }

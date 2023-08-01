@@ -43,20 +43,19 @@ export default function SignUpPage() {
   };
   
 
-//     try {
-//       // Perform your signup logic with email and password
-//       const response = await axios.post("YOUR_BACKEND_API_ENDPOINT", {
-//         email,
-//         password,
-//       });
-//       console.log("Signup successful!", response.data);
-//       // Navigate to another page on successful signup
-//       navigate("/Registration");
-//     } catch (error) {
-//       setError("Signup failed. Please try again.");
-//       console.error(error);
-//     }
-//   };
+    // try {
+    //   const response = await axios.post("YOUR_BACKEND_API_ENDPOINT", {
+    //     email,
+    //     password,
+    //   });
+    //   console.log("Signup successful!", response.data);
+    //   // Navigate to another page on successful signup
+    //   navigate("/Registration");
+    // } catch (error) {
+    //   setError("Signup failed. Please try again.");
+    //   console.error(error);
+    // }
+  
   
 
   return (
@@ -167,4 +166,4 @@ export default function SignUpPage() {
       <Registration showModal={showModal} setShowModal={setShowModal} />
     </main>
   );
-}
+  }
