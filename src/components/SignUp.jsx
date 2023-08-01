@@ -43,20 +43,6 @@ export default function SignUpPage() {
   };
   
 
-    // try {
-    //   const response = await axios.post("YOUR_BACKEND_API_ENDPOINT", {
-    //     email,
-    //     password,
-    //   });
-    //   console.log("Signup successful!", response.data);
-    //   // Navigate to another page on successful signup
-    //   navigate("/Registration");
-    // } catch (error) {
-    //   setError("Signup failed. Please try again.");
-    //   console.error(error);
-    // }
-  
-  
 
   return (
     <main className="flex justify-center items-center min-h-screen">
