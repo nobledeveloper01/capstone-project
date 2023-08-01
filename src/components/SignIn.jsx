@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGoogle,
@@ -48,13 +48,45 @@ const SignInPage = () => {
 
       // Handle successful login
       onLogin(data.user);
-      navigate("/home"); // Assuming `navigate` is a function for navigating to another page
+      navigate("/"); // Assuming `navigate` is a function for navigating to another page
     } catch (error) {
       console.error("Error logging in:", error);
       setError("Error logging in. Please try again.");
     }
   };
 
+  useEffect(() => {
+    // Function to check if the user exists and the password is correct
+    const checkUserAndPassword = async () => {
+      try {
+        const response = await axios.post("http://localhost:5000/api/login", {
+          email,
+          password,
+        });
+
+        const existingUsers = response.data.users;
+        const user = existingUsers.find((user) => user.username === email);
+
+        if (!user) {
+          setError("User does not exist.");
+          return;
+        }
+
+        if (user.password !== password) {
+          setError("Username or password is incorrect.");
+          return;
+        }
+
+        // If everything is correct, you can call the onLogin function and navigate to the desired route
+        onLogin(user);
+        navigate("/home");
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    checkUserAndPassword();
+  }, [email, password, navigate]);
   return (
     <main className="flex justify-center items-center min-h-screen">
       <section className="bg-white p-8 rounded-lg shadow-md w-full md:w-3/6 max-h-screen overflow-auto">
