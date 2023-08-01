@@ -58,6 +58,7 @@ const Registration = ({ showModal, setShowModal }) => {
 
     // Implement your form submission logic here, including API endpoint calls
     try {
+  
       const userData = {
         firstName,
         lastName,
@@ -87,6 +88,7 @@ const Registration = ({ showModal, setShowModal }) => {
     } catch (error) {
       console.error("Error registering user:", error);
     }
+
 
     // After successful submission, you can close the modal
     setShowModal(false);

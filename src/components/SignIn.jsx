@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import signinImage from "../assets/images/sign in image.png";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from 'axios';
 
 const SignInPage = () => {
   const navigate = useNavigate();
@@ -19,8 +19,10 @@ const SignInPage = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setError("Please fill all fields");
+
+    if (!email || !password ) {
+      setError("pls fill all fields");
+
       return;
     }
 
@@ -29,7 +31,6 @@ const SignInPage = () => {
         username: email,
         password,
       };
-
       const response = await axios.post(
         "http://localhost:5000/api/login",
         loginData,
@@ -59,6 +60,7 @@ const SignInPage = () => {
     // Function to check if the user exists and the password is correct
     const checkUserAndPassword = async () => {
       try {
+
         const response = await axios.post("http://localhost:5000/api/login", {
           email,
           password,
@@ -68,11 +70,12 @@ const SignInPage = () => {
         const user = existingUsers.find((user) => user.username === email);
 
         if (!user) {
+
           setError("User does not exist.");
           return;
         }
 
-        if (user.password !== password) {
+        if (users.password !== password) {
           setError("Username or password is incorrect.");
           return;
         }
@@ -184,6 +187,6 @@ const SignInPage = () => {
       </aside>
     </main>
   );
-};
+}
 
 export default SignInPage;

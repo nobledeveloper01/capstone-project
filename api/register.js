@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const User = require("./user");
@@ -25,10 +26,13 @@ router.post("/", async (req, res) => {
     password,
   } = req.body;
 
+
   try {
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+
+   
       return res.status(400).json({ message: "User already exists." });
     }
 
