@@ -53,6 +53,7 @@ export default function SignUpPage() {
     setShowModal(true);
   };
 
+
   return (
     <main className="flex justify-center items-center min-h-screen">
       <aside className="hidden md:block w-1/2">
@@ -161,4 +162,4 @@ export default function SignUpPage() {
       <Registration showModal={showModal} setShowModal={setShowModal} />
     </main>
   );
-}
+  }

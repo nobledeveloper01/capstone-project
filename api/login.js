@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Users = require('./validate'); // Assuming you have a User model for MongoDB
+const User = require('./user'); // Assuming you have a User model for MongoDB
+
 
 // Route to handle user login
 router.post('/', async (req, res) => {
@@ -10,10 +12,11 @@ router.post('/', async (req, res) => {
     // Validate data here (e.g., check for required fields)
 
     // Find the user by email in the MongoDB database
-    const users = Users.findOne({ email });
+
+    const user = User.findOne({ email });
 
     // Check if the user exists
-    if (!users) {
+    if (!user) {
       return res.status(404).json({ success: false, message: 'User not found.' });
     }
 
@@ -24,6 +27,7 @@ router.post('/', async (req, res) => {
 
     // If the email and password match, the user is authenticated
     res.json({ success: true, message: 'Login successful!', users });
+
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ success: false, message: 'Failed to login.' });

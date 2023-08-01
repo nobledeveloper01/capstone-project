@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle, faFacebook, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import {
+  faGoogle,
+  faFacebook,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
 import signinImage from "../assets/images/sign in image.png";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -15,42 +19,59 @@ const SignInPage = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
 
+
     if (!email || !password ) {
       setError("pls fill all fields");
+
       return;
-
-  }
-
-  const loginData = { email, password };
-    try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(loginData),
-      });
-  
-  const data = await response.json();
-      console.log(data); // Handle the response from the backend
-    } catch (error) {
-      console.error('Error logging in:', error);
     }
 
-    // Perform your sign-in logic with email and password
-    console.log("Submitted data:", email, password);
+    try {
+      const loginData = {
+        username: email,
+        password,
+      };
+    }
+      const response = await axios.post(
+        "http://localhost:5000/api/login",
+        loginData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = response.data;
+      if (data.error) {
+        setError(data.error);
+        return;
+      }
+
+      // Handle successful login
+      onLogin(data.user);
+      navigate("/"); // Assuming `navigate` is a function for navigating to another page
+    } catch (error) {
+      console.error("Error logging in:", error);
+      setError("Error logging in. Please try again.");
+    }
   };
-  
+
   useEffect(() => {
     // Function to check if the user exists and the password is correct
     const checkUserAndPassword = async () => {
       try {
-        const response = await axios.post('http://localhost:5000/api/login', { email, password });
-        console.log(response.data); // Handle the response from the backend
-        const existingUser = response.data.users;
-        const users = existingUser.find((users) => users.email === email);
-        
-        if (!users) {
+
+        const response = await axios.post("http://localhost:5000/api/login", {
+          email,
+          password,
+        });
+
+        const existingUsers = response.data.users;
+        const user = existingUsers.find((user) => user.username === email);
+
+        if (!user) {
+
           setError("User does not exist.");
           return;
         }
@@ -61,8 +82,8 @@ const SignInPage = () => {
         }
 
         // If everything is correct, you can call the onLogin function and navigate to the desired route
-        onLogin(users);
-        navigate("/Dashboard");
+        onLogin(user);
+        navigate("/home");
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -76,7 +97,10 @@ const SignInPage = () => {
         <h1 className="text-4xl text-green-600 font-bold mb-8">Sign In</h1>
         <form onSubmit={handleSignIn} className="mb-4">
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 font-semibold mb-1">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-semibold mb-1"
+            >
               Email Address
             </label>
             <input
@@ -90,7 +114,10 @@ const SignInPage = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="password" className="block text-gray-700 font-semibold mb-1">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 font-semibold mb-1"
+            >
               Password
             </label>
             <div className="relative">
@@ -121,8 +148,9 @@ const SignInPage = () => {
             </Link>
           </div>
           <button
-          onClick={handleSignIn}
-           className="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
+            onClick={handleSignIn}
+            className="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700"
+          >
             Sign In
           </button>
         </form>

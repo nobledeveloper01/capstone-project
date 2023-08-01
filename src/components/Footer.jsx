@@ -28,7 +28,7 @@ const Footer = () => {
             <h4 className="text-xl font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/Home">Home</Link>
               </li>
               <li>
                 <Link to="/about">About</Link>

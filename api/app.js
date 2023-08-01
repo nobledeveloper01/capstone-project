@@ -4,6 +4,7 @@ const cors = require('cors'); // Import the cors package
 const app = express();
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+
 const port = 5000;
 
 // Middleware
@@ -53,6 +54,22 @@ app.post('/login', async (req, res) => {
 // Import the 'login' API endpoint
 const login = require('./login'); // Adjust the path if necessary
 app.use('/api/login', login);
+
+// POST endpoint for user login
+app.post('/api/login', (req, res) => {
+    const { email, password } = req.body;
+
+// Replace this with actual database validation
+const user = users.find((u) => u.email === email && u.password === password);
+
+if (user) {
+    // Return success or provide an authentication token for further authorization
+    res.json({ success: true, message: 'Login successful!' });
+  } else {
+    res.status(401).json({ success: false, message: 'Invalid credentials' });
+  }
+});
+
 
 // Sample route for testing
 app.get('/', (req, res) => {

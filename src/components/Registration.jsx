@@ -5,8 +5,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Registration = ({ showModal, setShowModal }) => {
   const navigate = useNavigate();
@@ -60,12 +58,37 @@ const Registration = ({ showModal, setShowModal }) => {
 
     // Implement your form submission logic here, including API endpoint calls
     try {
-    const userData = { firstName, lastName, otherName, email, dob, gender, nationality, nationalities, lgas, selectedState, selectedLga, address, areaCode, phoneNumber, farmingType, identificationType, file, userCategory };
-    const response = await axios.post('http://localhost:5000/api/user', userData);
-    setMessage(response.data.message);
-  } catch (error) {
-    console.error('Error registering user:', error);
-  };    
+  
+      const userData = {
+        firstName,
+        lastName,
+        otherName,
+        email,
+        dob,
+        gender,
+        nationality,
+        nationalities,
+        lgas,
+        selectedState,
+        selectedLga,
+        address,
+        areaCode,
+        phoneNumber,
+        farmingType,
+        identificationType,
+        file,
+        userCategory,
+        password,
+      };
+      const response = await axios.post(
+        "http://localhost:5000/api/register",
+        userData
+      );
+      setMessage(response.data.message);
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
+
 
     // After successful submission, you can close the modal
     setShowModal(false);
@@ -92,7 +115,7 @@ const Registration = ({ showModal, setShowModal }) => {
 
     if (isRegistrationSuccessful) {
       // Show toast notification
-      toast.success("Registration completed successfully!", {
+      alert("Registration completed successfully!", {
         onClose: () => {
           // Close the registration modal
           // Navigate back to sign-in
@@ -586,15 +609,12 @@ const Registration = ({ showModal, setShowModal }) => {
                 Submit
               </button>
             </div>
-            <div className="text-right"> 
+            <div className="text-right">
               {error && <p className="text-red-500 text-sm">{error}</p>}
-              </div>
+            </div>
           </div>
         </div>
       )}
-      <div>
-      <ToastContainer />
-      </div>
     </>
   );
 };
