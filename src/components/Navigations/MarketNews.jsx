@@ -1,11 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Header from "../Header";
 import PostedNewsImage from "../Navigations/Assets/poster news.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faCloud } from "@fortawesome/free-solid-svg-icons";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import Chart from "chart.js/auto";
 import Newsletter from "../Newsletter";
 import Footer from "../Footer";
+import axios from "axios";
+
+const CITY_NAME = "Ado, NG"; // Replace with your desired city name
+const API_KEY = "0069c7215595a16172415930eed74afa";
 
 export default function MarketNews() {
   const chartRef = useRef(null);
@@ -93,12 +98,29 @@ export default function MarketNews() {
     chartInstanceRef.current = newChartInstance;
   }, []);
 
+  const [weatherData, setWeatherData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&appid=${API_KEY}`
+      )
+      .then((response) => {
+        setWeatherData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching weather data:", error);
+        setWeatherData(null);
+      });
+  }, []);
+
+
   return (
     <div>
       <Header />
       <div className="container mx-auto mt-8">
         <div className="text-center bg-gray-200 px-7 py-7 mx-4 my-4 rounded-2xl">
-          <h1 className="text-3xl font-bold mb-4">Welcome to AgricConnect</h1>
+          <h1 className="text-3xl font-bold mb-4">Welcome to AgricConnect MarketNews</h1>
           <p className="text-xl mb-8">
             Craft Narratives{" "}
             <span role="img" aria-label="Writing">
@@ -215,6 +237,42 @@ export default function MarketNews() {
             <canvas ref={chartRef} />
           </div>
         </div>
+        {/* Weather Report */}
+        <div className="bg-gray-200 p-4 rounded-xl">
+            <div className="flex items-center mb-4">
+              <h3 className="text-xl font-bold mr-2">Weather Today</h3>
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="text-gray-500" />
+              <p className="ml-2">{CITY_NAME}</p>
+            </div>
+            {weatherData ? (
+              <>
+                <h2 className="text-2xl font-bold mb-2">
+                  {new Date().toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </h2>
+                <div className="flex items-center mb-4">
+                  {/* Illustration of the day weather */}
+                  {/* Add the appropriate icon from Font Awesome */}
+                  <FontAwesomeIcon icon={faCloud} className="text-4xl mr-2" />
+                  <p className="text-2xl font-bold">
+                    {weatherData.weather[0].main}
+                  </p>
+                </div>
+                <p className="text-lg">
+                  Temperature: {weatherData.main.temp} °C
+                </p>
+                <p>Humidity: {weatherData.main.humidity}%</p>
+                <p>Wind: {weatherData.wind.speed} m/s</p>
+              </>
+            ) : (
+              <p>Loading weather data...</p>
+            )}
+          </div>
+
       </div>
       <Newsletter />
       <Footer />
