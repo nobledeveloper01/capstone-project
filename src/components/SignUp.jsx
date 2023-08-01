@@ -32,6 +32,17 @@ export default function SignUpPage() {
       setError("Please fill all fields.");
       return;
     }
+
+    try {
+      // Perform your signup logic with email and password
+      const response = await axios.post('http://localhost:5000/api/users', { email, password });
+      console.log("Signup successful!", response.data);
+      // Navigate to another page on successful signup
+      navigate(Registration);
+    } catch (error) {
+      setError("Signup failed. Please try again.");
+      console.error(error);
+    };
   
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
@@ -41,22 +52,7 @@ export default function SignUpPage() {
     // If there are no errors, setShowModal to true
     setShowModal(true);
   };
-  
 
-    // try {
-    //   const response = await axios.post("YOUR_BACKEND_API_ENDPOINT", {
-    //     email,
-    //     password,
-    //   });
-    //   console.log("Signup successful!", response.data);
-    //   // Navigate to another page on successful signup
-    //   navigate("/Registration");
-    // } catch (error) {
-    //   setError("Signup failed. Please try again.");
-    //   console.error(error);
-    // }
-  
-  
 
   return (
     <main className="flex justify-center items-center min-h-screen">
