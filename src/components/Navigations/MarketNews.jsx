@@ -2,13 +2,39 @@ import React, { useEffect, useRef, useState } from "react";
 import Header from "../Header";
 import PostedNewsImage from "../Navigations/Assets/poster news.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faCloud } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSun,
+  faCloud as faCloudRegular,
+  faCloud,
+  faCloudSun,
+  faCloudShowersHeavy,
+} from "@fortawesome/free-solid-svg-icons";
 import Chart from "chart.js/auto";
 import Newsletter from "../Newsletter";
 import Footer from "../Footer";
 import axios from "axios";
+import LearningCenterImage from "../Navigations/Assets/learn image.jpg";
 
+const weatherIcons = {
+  Clear: faSun,
+  Clouds: faCloud,
+  sunny: faCloudSun,
+  Drizzle: faCloudShowersHeavy,
+  Rain: faCloudShowersHeavy,
+  Thunderstorm: faCloudShowersHeavy,
+  Snow: faCloudShowersHeavy,
+  Mist: faCloudRegular,
+  Smoke: faCloudRegular,
+  Haze: faCloudRegular,
+  Dust: faCloudRegular,
+  Fog: faCloudRegular,
+  Sand: faCloudRegular,
+  Ash: faCloudRegular,
+  Squall: faCloudRegular,
+  Tornado: faCloudRegular,
+};
 const CITY_NAME = "Ado, NG"; // Replace with your desired city name
 const API_KEY = "0069c7215595a16172415930eed74afa";
 
@@ -67,7 +93,16 @@ export default function MarketNews() {
     }
 
     const chartData = {
-      labels: ["Birds", "Grains", "Tubers", "Chemical", "Feeds", "Livestock", "Crop", "Vegetables"],
+      labels: [
+        "Birds",
+        "Grains",
+        "Tubers",
+        "Chemical",
+        "Feeds",
+        "Livestock",
+        "Crop",
+        "Vegetables",
+      ],
       datasets: [
         {
           label: "Agriculture Products",
@@ -114,13 +149,14 @@ export default function MarketNews() {
       });
   }, []);
 
-
   return (
     <div>
       <Header />
       <div className="container mx-auto mt-8">
         <div className="text-center bg-gray-200 px-7 py-7 mx-4 my-4 rounded-2xl">
-          <h1 className="text-3xl font-bold mb-4">Welcome to AgricConnect MarketNews</h1>
+          <h1 className="text-3xl font-bold mb-4">
+            Welcome to AgricConnect MarketNews
+          </h1>
           <p className="text-xl mb-8">
             Craft Narratives{" "}
             <span role="img" aria-label="Writing">
@@ -149,43 +185,44 @@ export default function MarketNews() {
         </div>
       </div>
       <div className="flex flex-col md:flex-row items-start ml-6 mt-12">
-  <img
-    src={PostedNewsImage}
-    alt="Posted News"
-    className="w-full h-70 md:w-1/2 md:h-96 rounded-xl mr-4"
-  />
-  <div className="ml-0 md:ml-10 mt-4 md:mt-0 md:w-1/2">
-    {/* Name and minutes posted */}
-    <p className="text-sm text-gray-500 mb-2">
-      Posted by John Doe | 15 minutes ago
-    </p>
-    {/* Header */}
-    <h2 className="text-4xl font-bold mb-2">
-      Regenerative Agriculture and its Impact on Soil Health and Biodiversity
-    </h2>
-    {/* Blog content */}
-    <p className="text-sm mb-4 text-justify md:mr-5">
-      Regenerative agriculture is a holistic farming approach that goes beyond
-      sustainable practices to actively restore and enhance the health of the
-      land and surrounding ecosystems. This innovative farming method focuses on
-      regenerating the soil, fostering biodiversity, and increasing the overall
-      resilience of agricultural systems. By implementing regenerative
-      practices, farmers aim to rebuild soil organic matter, improve soil
-      structure, and enhance soil fertility. This, in turn, leads to increased
-      water retention, reduced erosion, and greater nutrient availability for
-      crops, resulting in higher yields and more sustainable agricultural
-      productivity. One of the key principles of regenerative agriculture is
-      minimizing soil disturbance, such as tillage, which helps to preserve the
-      soil's natural structure and minimize the release of carbon dioxide into
-      the ...
-    </p>
-    {/* Category and minutes posted */}
-    <p className="text-sm text-gray-500">
-      Category: Regenerative Agriculture • read 5 minutes ago
-    </p>
-  </div>
-</div>
-
+        <img
+          src={PostedNewsImage}
+          alt="Posted News"
+          className="w-full h-70 md:w-1/2 md:h-96 rounded-xl mr-4"
+        />
+        <div className="ml-0 md:ml-10 mt-4 md:mt-0 md:w-1/2">
+          {/* Name and minutes posted */}
+          <p className="text-sm text-gray-500 mb-2">
+            Posted by John Doe | 15 minutes ago
+          </p>
+          {/* Header */}
+          <h2 className="text-4xl font-bold mb-2">
+            Regenerative Agriculture and its Impact on Soil Health and
+            Biodiversity
+          </h2>
+          {/* Blog content */}
+          <p className="text-sm mb-4 text-justify md:mr-5">
+            Regenerative agriculture is a holistic farming approach that goes
+            beyond sustainable practices to actively restore and enhance the
+            health of the land and surrounding ecosystems. This innovative
+            farming method focuses on regenerating the soil, fostering
+            biodiversity, and increasing the overall resilience of agricultural
+            systems. By implementing regenerative practices, farmers aim to
+            rebuild soil organic matter, improve soil structure, and enhance
+            soil fertility. This, in turn, leads to increased water retention,
+            reduced erosion, and greater nutrient availability for crops,
+            resulting in higher yields and more sustainable agricultural
+            productivity. One of the key principles of regenerative agriculture
+            is minimizing soil disturbance, such as tillage, which helps to
+            preserve the soil's natural structure and minimize the release of
+            carbon dioxide into the ...
+          </p>
+          {/* Category and minutes posted */}
+          <p className="text-sm text-gray-500">
+            Category: Regenerative Agriculture • read 5 minutes ago
+          </p>
+        </div>
+      </div>
 
       {/* Latest News Section */}
       <div className="flex justify-between items-center mb-4 mt-16">
@@ -229,50 +266,82 @@ export default function MarketNews() {
           </div>
         ))}
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ml-5 mr-5">
         {/* Bar Chart */}
-        <div className="bg-white p-4 rounded-xl shadow-xl ">
+        <div className="bg-white p-4 rounded-xl shadow-2xl ">
           <h2 className="text-2xl font-bold mb-4">Enquired Agric Products</h2>
           <div>
             <canvas ref={chartRef} />
           </div>
         </div>
         {/* Weather Report */}
-        <div className="bg-gray-200 p-4 rounded-xl">
-            <div className="flex items-center mb-4">
-              <h3 className="text-xl font-bold mr-2">Weather Today</h3>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className="text-gray-500" />
-              <p className="ml-2">{CITY_NAME}</p>
+        <div>
+          <div className="bg-white p-4 rounded-xl shadow-2xl h-1/2 mb-6">
+            <div className="flex items-center mb-1 justify-between">
+              <h4 className="text-xl font-bold mr-2 text-gray-500">
+                Weather Today
+              </h4>
+              <div className="flex items-center mb-1">
+                <FontAwesomeIcon
+                  icon={faMapMarkerAlt}
+                  className="text-blue-700"
+                />
+                <p className="ml-2">{CITY_NAME}</p>
+              </div>
             </div>
             {weatherData ? (
-              <>
-                <h2 className="text-2xl font-bold mb-2">
+              <div>
+                <h3 className="text-xl font-bold mb-1 text-green-700">
                   {new Date().toLocaleDateString("en-US", {
                     weekday: "long",
                     year: "numeric",
                     month: "long",
                     day: "numeric",
                   })}
-                </h2>
-                <div className="flex items-center mb-4">
-                  {/* Illustration of the day weather */}
-                  {/* Add the appropriate icon from Font Awesome */}
-                  <FontAwesomeIcon icon={faCloud} className="text-4xl mr-2" />
-                  <p className="text-2xl font-bold">
-                    {weatherData.weather[0].main}
-                  </p>
-                </div>
-                <p className="text-lg">
-                  Temperature: {weatherData.main.temp} °C
-                </p>
-                <p>Humidity: {weatherData.main.humidity}%</p>
-                <p>Wind: {weatherData.wind.speed} m/s</p>
-              </>
+                </h3>
+                <>
+                  <div className=" flex items-center mb-1 justify-between">
+                    <div className="flex items-center mb-2">
+                      {/* Illustration of the day weather */}
+                      {/* Add the appropriate icon from Font Awesome */}
+                      {weatherIcons[weatherData.weather[0].main] && (
+                        <FontAwesomeIcon
+                          icon={weatherIcons[weatherData.weather[0].main]}
+                          className="text-6xl mr-2 text-blue-700"
+                        />
+                      )}
+                      <p className="text-2xl font-bold text-green-700">
+                        {weatherData.weather[0].main}
+                      </p>
+                    </div>
+                    <div className="text-blue-800">
+                      <p className="text-lg ">
+                        Temperature: {weatherData.main.temp.toFixed(1)} °C
+                      </p>
+                      <p>Humidity: {weatherData.main.humidity}%</p>
+                      <p>Wind: {weatherData.wind.speed} m/s</p>
+                    </div>
+                  </div>
+                </>
+              </div>
             ) : (
               <p>Loading weather data...</p>
             )}
           </div>
-
+          <div
+            className="bg-white p-4 rounded-xl shadow-2xl h-1/3 relative"
+            style={{
+              background: "linear-gradient(45deg, #4CAF50, #2196F3)",
+            }}
+          >
+            <h4 className="text-2xl font-bold mb-4 items-center text-white">Learning Center</h4>
+            <button className="bg-green-900 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
+              Learn More
+            </button>
+            {/* You can add other content here */}
+          </div>
+        </div>
       </div>
       <Newsletter />
       <Footer />
