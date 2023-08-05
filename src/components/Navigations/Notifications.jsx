@@ -1,7 +1,20 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import Header from "../Header";
+import Newsletter from "../Newsletter";
+import Footer from "../Footer";
 
-export default function Notifications() {
+const Notifications = () => {
+ 
+
   return (
-    <div>Notifications</div>
-  )
-}
+    <div>
+      <Header />
+      
+      <Newsletter />
+      <Footer />
+    </div>
+  );
+};
+
+export default Notifications;

@@ -80,6 +80,11 @@ const Registration = ({ showModal, setShowModal }) => {
         userCategory,
         password,
       };
+
+      const uploadFile = () => {
+        const formData = new FormData();
+        formData.append('file', file);
+      }
       const response = await axios.post(
         "http://localhost:5000/api/register",
         userData
@@ -558,6 +563,7 @@ const Registration = ({ showModal, setShowModal }) => {
                       type="file"
                       id="fileUpload"
                       name="fileUpload"
+                      onClick={uploadFile}
                       onChange={handleFileChange}
                       className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900 opacity-0 absolute top-0 left-0"
                     />

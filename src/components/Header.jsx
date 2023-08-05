@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
-  faCog,
   faBell,
   faQuestionCircle,
   faChevronDown,
@@ -115,14 +114,6 @@ const Header = () => {
               >
                 <FontAwesomeIcon icon={faUser} className="mr-2" />
                 Profile
-              </Link>
-              <Link
-                to="/home/settings"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                role="menuitem"
-              >
-                <FontAwesomeIcon icon={faCog} className="mr-2" />
-                Settings
               </Link>
               <Link
                 to="/home/notifications"

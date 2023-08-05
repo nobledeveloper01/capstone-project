@@ -8,7 +8,7 @@ import Home from "./components/Home";
 import AddProduct from "./components/Navigations/AddProduct";
 import MarketPlace from "./components/Navigations/MarketPlace";
 import MarketNews from "./components/Navigations/MarketNews";
-import Settings from "./components/Navigations/Settings";
+import Profile from "./components/Navigations/profile";
 import Notifications from "./components/Navigations/Notifications";
 import HelpAndFaqs from "./components/Navigations/HelpAndFaqs";
 
@@ -41,7 +41,7 @@ const App = () => {
             <Route path="/home/marketnews" element={<MarketNews />} />
 
             {/* Settings Page */}
-            <Route path="/home/settings" element={<Settings />} />
+            <Route path="/home/profile" element={<Profile />} />
 
             {/* Notifications Page */}
             <Route path="/home/notifications" element={<Notifications />} />
