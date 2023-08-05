@@ -1,9 +1,9 @@
 import React from "react";
+import axios from 'axios';
 import { Route, Routes } from "react-router-dom";
 import LandingPage from "./components/LandingPage";
 import SignInPage from "./components/SignIn";
 import SignUpPage from "./components/SignUp";
-import Registration from "./components/Registration";
 import Home from "./components/Home";
 import AddProduct from "./components/Navigations/AddProduct";
 import MarketPlace from "./components/Navigations/MarketPlace";
@@ -13,6 +13,7 @@ import Notifications from "./components/Navigations/Notifications";
 import HelpAndFaqs from "./components/Navigations/HelpAndFaqs";
 
 const App = () => {
+
   return (
     <div className="flex flex-col h-screen">
       {/* Main Content */}
@@ -26,9 +27,7 @@ const App = () => {
             <Route path="/signin" element={<SignInPage />} />
             {/* SignUp Page */}
             <Route path="/signup" element={<SignUpPage />} />
-            {/* Registration Page */}
-            <Route path="/registration" element={<Registration />} />
-
+            
             {/* Home Page */}
             <Route path="/home/*" element={<Home />} />
             {/* Add a Product Page */}
