@@ -47,20 +47,7 @@ app.use("/api/users", usersRoute);
 
 const users = User;
 
-// // Define API route to fetch users
-// app.get('/api/users', async (req, res) => {
-//   try {
-//     const users = await User.find();
-//     res.json(users);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Server error' });
-//   }
-// });
 
-// app.get("/api/users", (req, res) => {
-//     res.json(users);
-// });
 
 // Connect to MongoDB
 mongoose
