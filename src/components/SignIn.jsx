@@ -24,82 +24,35 @@ const SignInPage = () => {
       setError("pls fill all fields");
 
       return;
-    }
+  }
 
-    try {
-      const loginData = {
-        username: email,
-        password,
-      };
-      const response = await axios.post(
-        "http://localhost:5000/api/login",
-        loginData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+  try {
+    
+    const response = await axios.post(
+      "http://localhost:5000/api/login", { email, password }
       );
 
-      const data = response.data;
-      if (data.error) {
-        setError(data.error);
-        return;
-      }
+    const { token } = response.data;
 
-      // Handle successful login
-      onLogin(data.user);
-      navigate("/"); // Assuming `navigate` is a function for navigating to another page
-    } catch (error) {
-      console.error("Error logging in:", error);
-      setError("Error logging in. Please try again.");
-    }
-  };
+    // Store the token in local storage or a state management library (e.g., Redux)
+    localStorage.setItem('token', token);
+    // Redirect to the dashboard or home page after successful signin
+    // (You can use react-router-dom for handling routes)
+    window.location.replace('/Home'); // Replace with your desired route
+  } catch (error) {
+    console.error('Error during signin:', error.response.data.message);
+    // Handle signin error and display a message to the user
+    return;
+  }
+};
 
-  useEffect(() => {
-    // Function to check if the user exists and the password is correct
-    const checkUserAndPassword = async () => {
-      try {
-
-        const response = await axios.post("http://localhost:5000/api/login", {
-          email,
-          password,
-        });
-
-        const existingUsers = response.data.users;
-        const user = existingUsers.find((user) => user.username === email);
-
-        if (!user) {
-
-          setError("User does not exist.");
-          return;
-        }
-
-        if (users.password !== password) {
-          setError("Username or password is incorrect.");
-          return;
-        }
-
-        // If everything is correct, you can call the onLogin function and navigate to the desired route
-        onLogin(user);
-        navigate("/home");
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    checkUserAndPassword();
-  }, [email, password, navigate]);
   return (
     <main className="flex justify-center items-center min-h-screen">
       <section className="bg-white p-8 rounded-lg shadow-md w-full md:w-3/6 max-h-screen overflow-auto">
         <h1 className="text-4xl text-green-600 font-bold mb-8">Sign In</h1>
         <form onSubmit={handleSignIn} className="mb-4">
           <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-gray-700 font-semibold mb-1"
-            >
+            <label htmlFor="email" className="block text-gray-700 font-semibold mb-1">
               Email Address
             </label>
             <input
@@ -113,10 +66,7 @@ const SignInPage = () => {
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-gray-700 font-semibold mb-1"
-            >
+            <label htmlFor="password" className="block text-gray-700 font-semibold mb-1">
               Password
             </label>
             <div className="relative">
@@ -147,9 +97,8 @@ const SignInPage = () => {
             </Link>
           </div>
           <button
-            onClick={handleSignIn}
-            className="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700"
-          >
+          onClick={handleSignIn}
+           className="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
             Sign In
           </button>
         </form>
