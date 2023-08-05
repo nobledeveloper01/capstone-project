@@ -24,7 +24,7 @@ const HelpAndFaqs = () => {
     {
       question: "How do I sign out?",
       answer:
-        "To sign out, click on your profile icon at the top right corner of the page. In the dropdown menu, you will find the 'Sign Out' option. Click on it to log out of your account.",
+        "To sign out, click on your profile icon at the top right corner of the page. You will find the 'Sign Out' option in the dropdown menu. Click on it to log out of your account.",
     },
     {
       question: "How do I upload my profile picture?",
@@ -39,7 +39,7 @@ const HelpAndFaqs = () => {
     {
       question: "How do I post a blog?",
       answer:
-        "To post a blog, go to the 'Blog' section of the website. Click on the 'Create New Blog' button and fill in the title, content, and any relevant tags. Once you're done, click on 'Publish' to make your blog post live.",
+        "To post a blog, go to the 'Blog' section of the website. Click the 'Create New Blog' button and fill in the title, content, and relevant tags. Once you're done, click on 'Publish' to make your blog post live.",
     },
     {
       question: "How do I see my seller address?",
