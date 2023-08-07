@@ -56,16 +56,15 @@ export default function AddProduct() {
   };
 
   // Make a POST request to your backend API to save the data
-  axios
-  const response = await axios.post("Http://localhost5000/api/products", data)
-    .then((response) => {
+  try {
+  const response = await axios.post("http://localhost:5000/api/products", data);
+
       console.log("Product submitted:", response.data);
       alert("Your have successfully added your product");
       navigate("/home");
-    })
-    .catch((error) => {
+    } catch(error) {
       console.error("Error submitting product:", error);
-    });
+    };
 };
  
   const handleCategoryChange = (e) => {

@@ -41,7 +41,7 @@ const UploadImages = () => {
         formData.append("file", file);
 
         // Replace "YOUR_UPLOAD_API_ENDPOINT" with your actual backend API endpoint for file upload
-        const response = await axios.post("YOUR_UPLOAD_API_ENDPOINT", formData, {
+        const response = await axios.post("http://localhost:5000/api/products", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
