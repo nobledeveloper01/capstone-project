@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Define the Product Upload schema
+// Defining the Product Upload schema
 const productSchema = new mongoose.Schema({
   product: String,
   category: String,
