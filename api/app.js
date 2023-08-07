@@ -13,6 +13,7 @@ const port = 5000;
 const secretKey = "567y8tu7777"; // Change this to a secure secret key
 const saltRounds = 10; // You can adjust the number of salt rounds as per your requirement
 const User = require("./models/validate");
+const Product = require("./models/product");
 const Image = require("./models/image"); // Import your Mongoose model
 const usersRoute = require("./routes/users");
 const axios = require('axios'); 
@@ -156,6 +157,28 @@ app.post("/api/login", async (req, res) => {
   } catch (error) {
     console.error("Error during signin:", error);
     //res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.post('/api/products', async (req, res) => {
+  try {
+    const { name, price, description } = req.body;
+    const newProduct = new Product({ name, price, description });
+    await newProduct.save();
+    res.status(201).json(newProduct);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
+app.get('/api/products', async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred' });
   }
 });
 
