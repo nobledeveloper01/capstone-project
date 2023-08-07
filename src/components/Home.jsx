@@ -105,9 +105,7 @@ const Home = () => {
 
         <nav className="lg:flex lg:space-x-4 mt-4 lg:mt-0 text-white">
           <NavLink
-            exact
             to="/home"
-            activeClassName="border-b-2 border-white active-link"
             className="hover:text-gray-300"
           >
             Home
@@ -115,7 +113,6 @@ const Home = () => {
           <span className="border-r border-gray-600 px-2">|</span>
           <NavLink
             to="/home/add-product"
-            activeClassName="border-b-2 border-white active-link"
             className="hover:text-gray-300"
           >
             Add Product
@@ -123,7 +120,6 @@ const Home = () => {
           <span className="border-r border-gray-600 px-2">|</span>
           <NavLink
             to="/home/marketplace"
-            activeClassName="border-b-2 border-white active-link"
             className="hover:text-gray-300"
           >
             Market Place
@@ -131,7 +127,6 @@ const Home = () => {
           <span className="border-r border-gray-600 px-2">|</span>
           <NavLink
             to="/home/marketnews"
-            activeClassName="border-b-2 border-white active-link"
             className="hover:text-gray-300"
           >
             Market News

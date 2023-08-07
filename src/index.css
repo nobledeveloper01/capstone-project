@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    font-family: "Arial", "Helvetica", sans-serif;
+  }
+  
+  /* Fallback for sans-serif fonts */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Verdana", "Geneva", sans-serif;
+  }
+  
+  /* Fallback for serif fonts */
+  blockquote, p {
+    font-family: "Georgia", serif;
+  }
+  
+  /* Fallback for monospace fonts */
+  pre, code {
+    font-family: "Courier New", "Courier", monospace;
+  }
+  
