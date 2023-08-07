@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const UploadImages = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -33,32 +34,44 @@ const UploadImages = () => {
     }
 
     setUploading(true);
-    let counter = 0;
 
-    const uploadFile = (file, index) => {
-      // Simulate file upload progress (for demo purpose)
-      const interval = setInterval(() => {
+    const uploadFile = async (file, index) => {
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // Replace "YOUR_UPLOAD_API_ENDPOINT" with your actual backend API endpoint for file upload
+        const response = await axios.post("YOUR_UPLOAD_API_ENDPOINT", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            const newPreviews = [...filePreviews];
+            newPreviews[index].progress = progress;
+            setFilePreviews(newPreviews);
+          },
+        });
+
+        console.log("File upload response:", response.data);
+
+        // If needed, you can handle the response from the server here
+        // For example, update the progress or show success message
+
+        // After the upload is completed, you can update the file preview progress to 100
         const newPreviews = [...filePreviews];
-        newPreviews[index].progress += 10;
+        newPreviews[index].progress = 100;
         setFilePreviews(newPreviews);
-        if (newPreviews[index].progress >= 100) {
-          clearInterval(interval);
-          counter++;
-          if (counter === filePreviews.length) {
-            setUploading(false);
-            setMessage("Files uploaded successfully!");
-          }
-        }
-      }, 1000);
+      } catch (error) {
+        console.error("File upload failed:", error);
+      }
     };
 
     filePreviews.forEach((preview, index) => {
       // Perform the actual file upload logic here
-      // You can replace this with your API or backend integration
       uploadFile(preview.file, index);
     });
   };
-
   return (
     <div className="ml-4 max-w-lg p-4 border-4 border-green-700 bg-white rounded-xl shadow-xl">
       <h1 className="text-2xl font-bold mb-4">File Upload</h1>

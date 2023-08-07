@@ -22,7 +22,7 @@ export default function AddProduct() {
   const [selectedState, setSelectedState] = useState("");
   const [selectedLga, setSelectedLga] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (
@@ -57,7 +57,7 @@ export default function AddProduct() {
 
   // Make a POST request to your backend API to save the data
   axios
-    .post("YOUR_BACKEND_API_URL", data)
+  const response = await axios.post("Http://localhost5000/api/products", data)
     .then((response) => {
       console.log("Product submitted:", response.data);
       alert("Your have successfully added your product");

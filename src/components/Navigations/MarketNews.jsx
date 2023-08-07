@@ -330,13 +330,13 @@ export default function MarketNews() {
             )}
           </div>
           <div
-            className="bg-white p-4 rounded-xl shadow-2xl h-1/3 relative"
+            className=" bg-white p-4 rounded-xl shadow-2xl h-1/3 relative"
             style={{
               background: "linear-gradient(45deg, #4CAF50, #2196F3)",
             }}
           >
             <h4 className="text-2xl font-bold mb-4 items-center text-white">Learning Center</h4>
-            <button className="bg-green-900 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
+            <button className=" flex  bg-green-900 text-white px-6 py-3 rounded-lg hover:bg-gray-700">
               Learn More
             </button>
             {/* You can add other content here */}

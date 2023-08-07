@@ -12,8 +12,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import UploadFiles from "./FileUpload";
 
-const MAX_FILE_SIZE = 500 * 1024; // 500KB in bytes 
-
+const MAX_FILE_SIZE = 500 * 1024; // 500KB in bytes
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -47,7 +46,7 @@ export default function SignUpPage() {
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    
+
     if (
       !email ||
       !password ||
@@ -64,28 +63,44 @@ export default function SignUpPage() {
       !phoneNumber ||
       !farmingType ||
       !identificationType ||
-      !userCategory) {
+      !userCategory
+    ) {
       setError("Please fill all fields.");
       return;
     }
 
     try {
       // Perform your signup logic with email and password
-      const response = await axios.post('http://localhost:5000/api/register', { email, password, firstName, lastName, otherName, dob, gender, nationality, selectedState, selectedLga, address, areaCode, phoneNumber, farmingType, identificationType, userCategory });
+      const response = await axios.post("http://localhost:5000/api/register", {
+        email,
+        password,
+        firstName,
+        lastName,
+        otherName,
+        dob,
+        gender,
+        nationality,
+        selectedState,
+        selectedLga,
+        address,
+        areaCode,
+        phoneNumber,
+        farmingType,
+        identificationType,
+        userCategory,
+      });
       console.log("Signup successful!", response.data);
       // Navigate to another page on successful signup
       navigate("/signin");
     } catch (error) {
       setError("Signup failed. Please try again.");
       console.error(error);
-    };
-   if (password !== confirmPassword) {
-    setError("Passwords do not match.");
-    return;
-  }  
-};
-
-     
+    }
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+  };
 
   // Fetch nationalities from API on component mount
   useEffect(() => {
@@ -145,8 +160,8 @@ export default function SignUpPage() {
     setSelectedLga(e.target.value);
   };
 
-  const handleFileChange = (selectedFile) => { 
-    setFile(selectedFile); 
+  const handleFileChange = (selectedFile) => {
+    setFile(selectedFile);
   };
 
   return (
@@ -217,326 +232,326 @@ export default function SignUpPage() {
             </div>
           </div>
           <div className="mb-4">
-          <label
-                    htmlFor="firstName"
-                    className="block text-gray-700 font-semibold mb-1 w-full"
-                  >
-                    First Name*
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    placeholder="Enter your first name"
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="lastName"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    Last Name*
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    placeholder="Enter your last name"
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="otherName"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    Other Name
-                  </label>
-                  <input
-                    type="text"
-                    id="otherName"
-                    name="otherName"
-                    value={otherName}
-                    onChange={(e) => setOtherName(e.target.value)}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    placeholder="Enter your other name"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="dob"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    Date of Birth*
-                  </label>
-                  <DatePicker
-                    id="dob"
-                    name="dob"
-                    selected={dob}
-                    onChange={(date) => setDob(date)}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    placeholderText="Select your date of birth"
-                    dateFormat="dd/MM/yyyy" // Customize the date format if needed
-                    showYearDropdown // Optional: Show year dropdown in date picker
-                    dropdownMode="select" // Optional: Specify how the year dropdown works
-                    required
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="gender"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    Gender*
-                  </label>
-                  <select
-                    id="gender"
-                    name="gender"
-                    value={gender}
-                    onChange={(e) => setGender(e.target.value)}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    required
-                  >
-                    <option value="">Select gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="nationality"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    Nationality*
-                  </label>
-                  <select
-                    id="nationality"
-                    name="nationality"
-                    value={nationality}
-                    onChange={handleNationalityChange}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    required
-                  >
-                    <option value="">Select Nationality</option>
-                    {nationalities.map((nationalityOption) => (
-                      <option key={nationalityOption} value={nationalityOption}>
-                        {nationalityOption}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="state"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    State*
-                  </label>
-                  <select
-                    id="state"
-                    name="state"
-                    value={selectedState}
-                    onChange={handleStatesChange}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    required
-                  >
-                    <option value="">- Select -</option>
-                    <option value="Abia">Abia</option>
-                    <option value="Adamawa">Adamawa</option>
-                    <option value="AkwaIbom">AkwaIbom</option>
-                    <option value="Anambra">Anambra</option>
-                    <option value="Bauchi">Bauchi</option>
-                    <option value="Bayelsa">Bayelsa</option>
-                    <option value="Benue">Benue</option>
-                    <option value="Borno">Borno</option>
-                    <option value="Cross River">Cross River</option>
-                    <option value="Delta">Delta</option>
-                    <option value="Ebonyi">Ebonyi</option>
-                    <option value="Edo">Edo</option>
-                    <option value="Ekiti">Ekiti</option>
-                    <option value="Enugu">Enugu</option>
-                    <option value="FCT">FCT</option>
-                    <option value="Gombe">Gombe</option>
-                    <option value="Imo">Imo</option>
-                    <option value="Jigawa">Jigawa</option>
-                    <option value="Kaduna">Kaduna</option>
-                    <option value="Kano">Kano</option>
-                    <option value="Katsina">Katsina</option>
-                    <option value="Kebbi">Kebbi</option>
-                    <option value="Kogi">Kogi</option>
-                    <option value="Kwara">Kwara</option>
-                    <option value="Lagos">Lagos</option>
-                    <option value="Nasarawa">Nasarawa</option>
-                    <option value="Niger">Niger</option>
-                    <option value="Ogun">Ogun</option>
-                    <option value="Ondo">Ondo</option>
-                    <option value="Osun">Osun</option>
-                    <option value="Oyo">Oyo</option>
-                    <option value="Plateau">Plateau</option>
-                    <option value="Rivers">Rivers</option>
-                    <option value="Sokoto">Sokoto</option>
-                    <option value="Taraba">Taraba</option>
-                    <option value="Yobe">Yobe</option>
-                    <option value="Zamfara">Zamafara</option>
-                  </select>
-                </div>
+            <label
+              htmlFor="firstName"
+              className="block text-gray-700 font-semibold mb-1 w-full"
+            >
+              First Name*
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              placeholder="Enter your first name"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="lastName"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              Last Name*
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              placeholder="Enter your last name"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="otherName"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              Other Name
+            </label>
+            <input
+              type="text"
+              id="otherName"
+              name="otherName"
+              value={otherName}
+              onChange={(e) => setOtherName(e.target.value)}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              placeholder="Enter your other name"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="dob"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              Date of Birth*
+            </label>
+            <DatePicker
+              id="dob"
+              name="dob"
+              selected={dob}
+              onChange={(date) => setDob(date)}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              placeholderText="Select your date of birth"
+              dateFormat="dd/MM/yyyy" // Customize the date format if needed
+              showYearDropdown // Optional: Show year dropdown in date picker
+              dropdownMode="select" // Optional: Specify how the year dropdown works
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="gender"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              Gender*
+            </label>
+            <select
+              id="gender"
+              name="gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              required
+            >
+              <option value="">Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="nationality"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              Nationality*
+            </label>
+            <select
+              id="nationality"
+              name="nationality"
+              value={nationality}
+              onChange={handleNationalityChange}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              required
+            >
+              <option value="">Select Nationality</option>
+              {nationalities.map((nationalityOption) => (
+                <option key={nationalityOption} value={nationalityOption}>
+                  {nationalityOption}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="state"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              State*
+            </label>
+            <select
+              id="state"
+              name="state"
+              value={selectedState}
+              onChange={handleStatesChange}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              required
+            >
+              <option value="">- Select -</option>
+              <option value="Abia">Abia</option>
+              <option value="Adamawa">Adamawa</option>
+              <option value="AkwaIbom">AkwaIbom</option>
+              <option value="Anambra">Anambra</option>
+              <option value="Bauchi">Bauchi</option>
+              <option value="Bayelsa">Bayelsa</option>
+              <option value="Benue">Benue</option>
+              <option value="Borno">Borno</option>
+              <option value="Cross River">Cross River</option>
+              <option value="Delta">Delta</option>
+              <option value="Ebonyi">Ebonyi</option>
+              <option value="Edo">Edo</option>
+              <option value="Ekiti">Ekiti</option>
+              <option value="Enugu">Enugu</option>
+              <option value="FCT">FCT</option>
+              <option value="Gombe">Gombe</option>
+              <option value="Imo">Imo</option>
+              <option value="Jigawa">Jigawa</option>
+              <option value="Kaduna">Kaduna</option>
+              <option value="Kano">Kano</option>
+              <option value="Katsina">Katsina</option>
+              <option value="Kebbi">Kebbi</option>
+              <option value="Kogi">Kogi</option>
+              <option value="Kwara">Kwara</option>
+              <option value="Lagos">Lagos</option>
+              <option value="Nasarawa">Nasarawa</option>
+              <option value="Niger">Niger</option>
+              <option value="Ogun">Ogun</option>
+              <option value="Ondo">Ondo</option>
+              <option value="Osun">Osun</option>
+              <option value="Oyo">Oyo</option>
+              <option value="Plateau">Plateau</option>
+              <option value="Rivers">Rivers</option>
+              <option value="Sokoto">Sokoto</option>
+              <option value="Taraba">Taraba</option>
+              <option value="Yobe">Yobe</option>
+              <option value="Zamfara">Zamafara</option>
+            </select>
+          </div>
 
-                <div className="mb-4">
-                  <label
-                    htmlFor="lga"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    Local Government Area*
-                  </label>
-                  <select
-                    id="lga"
-                    name="lga"
-                    value={selectedLga}
-                    onChange={handleLgaChange}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    required
-                  >
-                    <option value="">- Select -</option>
-                    {lgas.map((lga) => (
-                      <option key={lga} value={lga}>
-                        {lga}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {/* Address Input */}
-                <div className="col-span-3 mb-3">
-                  <label
-                    htmlFor="address"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    Address*
-                  </label>
-                  <textarea
-                    id="address"
-                    name="address"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    placeholder="Enter your address"
-                    required
-                  />
-                </div>
-                <div className="flex flex-column justify-between mb-3">
-                  {/* Area Code Input */}
-                  <div className="w-1/7">
-                    <label
-                      htmlFor="phoneNumber"
-                      className="block text-gray-700 font-semibold mb-1"
-                    >
-                      Phone Number*
-                    </label>
-                    <select
-                      id="areaCode"
-                      name="areaCode"
-                      value={areaCode}
-                      onChange={(e) => setAreaCode(e.target.value)}
-                      className="1/2 px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                      required
-                    >
-                      <option value="">Area Code</option>
-                      <option value="234">+234</option>
-                      {/* Add more area codes here */}
-                    </select>
-                    <input
-                      type="number"
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
-                      className="w-3/2 px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                      placeholder="Enter your phone number"
-                      required
-                    />
-                  </div>
-                </div>
+          <div className="mb-4">
+            <label
+              htmlFor="lga"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              Local Government Area*
+            </label>
+            <select
+              id="lga"
+              name="lga"
+              value={selectedLga}
+              onChange={handleLgaChange}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              required
+            >
+              <option value="">- Select -</option>
+              {lgas.map((lga) => (
+                <option key={lga} value={lga}>
+                  {lga}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* Address Input */}
+          <div className="col-span-3 mb-3">
+            <label
+              htmlFor="address"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              Address*
+            </label>
+            <textarea
+              id="address"
+              name="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              placeholder="Enter your address"
+              required
+            />
+          </div>
+          <div className="flex flex-column justify-between mb-3">
+            {/* Area Code Input */}
+            <div className="w-1/7">
+              <label
+                htmlFor="phoneNumber"
+                className="block text-gray-700 font-semibold mb-1"
+              >
+                Phone Number*
+              </label>
+              <select
+                id="areaCode"
+                name="areaCode"
+                value={areaCode}
+                onChange={(e) => setAreaCode(e.target.value)}
+                className="1/2 px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+                required
+              >
+                <option value="">Area Code</option>
+                <option value="234">+234</option>
+                {/* Add more area codes here */}
+              </select>
+              <input
+                type="number"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="w-3/2 px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+          </div>
 
-                <div className="col-span-1 mb-2">
-                  <label
-                    htmlFor="farmingType"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    Farming Type*
-                  </label>
-                  <select
-                    id="farmingType"
-                    name="farmingType"
-                    value={farmingType}
-                    onChange={(e) => setFarmingType(e.target.value)}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    required
-                  >
-                    <option value="">Select farming type</option>
-                    <option value="crop">Crop Farming</option>
-                    <option value="livestock">Livestock Farming</option>
-                    <option value="poultry">Poultry Farming</option>
-                    <option value="None">None</option>
-                    {/* Add more farming types here */}
-                  </select>
-                </div>
-                <div className="col-span-1 mb-2">
-                  <label
-                    htmlFor="identificationType"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    Means of Identification*
-                  </label>
-                  <select
-                    id="identificationType"
-                    name="identificationType"
-                    value={identificationType}
-                    onChange={(e) => setIdentificationType(e.target.value)}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    required
-                  >
-                    <option value="">Select means of identification</option>
-                    <option value="nationalID">National ID</option>
-                    <option value="driverLicense">Driver's License</option>
-                    <option value="passport">Passport</option>
-                    <option value="voterID">Voter's ID</option>
-                    <option value="AssociationID">Association ID</option>
+          <div className="col-span-1 mb-2">
+            <label
+              htmlFor="farmingType"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              Farming Type*
+            </label>
+            <select
+              id="farmingType"
+              name="farmingType"
+              value={farmingType}
+              onChange={(e) => setFarmingType(e.target.value)}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              required
+            >
+              <option value="">Select farming type</option>
+              <option value="crop">Crop Farming</option>
+              <option value="livestock">Livestock Farming</option>
+              <option value="poultry">Poultry Farming</option>
+              <option value="None">None</option>
+              {/* Add more farming types here */}
+            </select>
+          </div>
+          <div className="col-span-1 mb-2">
+            <label
+              htmlFor="identificationType"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              Means of Identification*
+            </label>
+            <select
+              id="identificationType"
+              name="identificationType"
+              value={identificationType}
+              onChange={(e) => setIdentificationType(e.target.value)}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              required
+            >
+              <option value="">Select means of identification</option>
+              <option value="nationalID">National ID</option>
+              <option value="driverLicense">Driver's License</option>
+              <option value="passport">Passport</option>
+              <option value="voterID">Voter's ID</option>
+              <option value="AssociationID">Association ID</option>
 
-                    {/* Add more means of identification options here */}
-                  </select>
-                </div>
-                <div> 
-                  <UploadFiles />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="userCategory"
-                    className="block text-gray-700 font-semibold mb-1"
-                  >
-                    User Category*
-                  </label>
-                  <select
-                    id="userCategory"
-                    name="userCategory"
-                    value={userCategory}
-                    onChange={(e) => setUserCategory(e.target.value)}
-                    className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
-                    required
-                  >
-                    <option value="">Select user category</option>
-                    <option value="farmer">Farmer</option>
-                    <option value="buyer">Buyer</option>
-                    <option value="supplier">Supplier</option>
-                    {/* Add more user categories here if needed */}
-                  </select>
-                </div>
+              {/* Add more means of identification options here */}
+            </select>
+          </div>
+          <div>
+            <UploadFiles />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="userCategory"
+              className="block text-gray-700 font-semibold mb-1"
+            >
+              User Category*
+            </label>
+            <select
+              id="userCategory"
+              name="userCategory"
+              value={userCategory}
+              onChange={(e) => setUserCategory(e.target.value)}
+              className="w-full px-4 py-2 border-2 border-green-600 rounded-xl focus:outline-none focus:border-green-900"
+              required
+            >
+              <option value="">Select user category</option>
+              <option value="farmer">Farmer</option>
+              <option value="buyer">Buyer</option>
+              <option value="supplier">Supplier</option>
+              {/* Add more user categories here if needed */}
+            </select>
+          </div>
           <button
             onClick={handleSignUp}
             className="w-full bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700"
@@ -572,4 +587,4 @@ export default function SignUpPage() {
       </section>
     </main>
   );
-};
+}
