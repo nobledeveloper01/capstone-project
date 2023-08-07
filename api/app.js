@@ -154,16 +154,16 @@ app.post("/api/login", async (req, res) => {
     res.json({ token });
 
     res.status(200).json({ message: "Login successful" });
-  } catch (error) {
-    console.error("Error during signin:", error);
+  } catch (message) {
+    console.message("Error during signin:", message);
     //res.status(500).json({ message: 'Server error' });
   }
 });
 
 app.post('/api/products', async (req, res) => {
   try {
-    const { product, selectedCategory, selectedSubcategory, price, description, sellerContact, address, selectedState, selectedLga, tags } = req.body;
-    const newProduct = new Product({ product, selectedCategory, selectedSubcategory, price, description, sellerContact, address, selectedState, selectedLga, tags });
+    const { product, category, subcategory, price, description, sellerContact, address, state, lga, tags } = req.body;
+    const newProduct = new Product({ product, category, subcategory, price, description, sellerContact, address, state, lga, tags });
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {

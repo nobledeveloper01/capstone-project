@@ -40,7 +40,7 @@ const SignInPage = () => {
     // (You can use react-router-dom for handling routes)
     window.location.replace('/Home'); // Replace with your desired route
   } catch (error) {
-    console.error('Error during signin:', error.response.data.message);
+    setMessage('Error during signin:', error.response.data.message);
     // Handle signin error and display a message to the user
     return;
   }
@@ -103,6 +103,7 @@ const SignInPage = () => {
           </button>
         </form>
         {error && <p className="text-red-500 text-sm">{error}</p>}
+        {message && <p className="text-red-500 text-sm">{message}</p>}
         <div className="text-center mt-4">
           <p className="text-gray-600">Or sign in with:</p>
           <div className="flex flex-col items-center mt-2">
