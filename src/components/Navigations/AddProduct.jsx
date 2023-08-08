@@ -22,7 +22,7 @@ export default function AddProduct() {
   const [selectedState, setSelectedState] = useState("");
   const [selectedLga, setSelectedLga] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (
@@ -40,41 +40,38 @@ export default function AddProduct() {
       setError("Please fill all fields.");
       return;
     }
-
+    
     // Create a data object with the form values to send to the backend
-    const data = {
-      product,
-      category: selectedCategory,
-      subcategory: selectedSubcategory,
-      price,
-      description,
-      sellerContact,
-      address,
-      state: selectedState,
-      lga: selectedLga,
-      tags,
-    };
+  const data = {
+    product,
+    category: selectedCategory,
+    subcategory: selectedSubcategory,
+    price,
+    description,
+    sellerContact,
+    address,
+    state: selectedState,
+    lga: selectedLga,
+    tags,
+  };
 
-    // Make a POST request to your backend API to save the data
-    try {
-      const response = await axios.post(
-        "Http://localhost:5000/api/products",
-        data
-      );
+  // Make a POST request to your backend API to save the data
+  try {
+  const response = await axios.post("http://localhost:5000/api/products", data);
 
       console.log("Product submitted:", response.data);
       alert("Your have successfully added your product");
       navigate("/home");
-    } catch (error) {
+    } catch(error) {
       console.error("Error submitting product:", error);
-    }
-  };
-
+    };
+};
+ 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
     setSelectedSubcategory(""); // Reset the selected local government when the category changes
   };
-
+  
   const handleSubcategoryChange = (e) => {
     setSelectedSubcategory(e.target.value); // Update selected subcategory state
   };
@@ -88,12 +85,12 @@ export default function AddProduct() {
         )
         .then((response) => {
           const categoryData = response.data;
-          const selectedCategoryData = categoryData.find(
+          const selectedCategoryData = categoryData.find (
             (categoryData) => categoryData.category === selectedCategory
           );
-          if (selectedCategoryData && selectedCategoryData.subcategories) {
+          if (selectedCategoryData && selectedCategoryData.subcategories){
             setSubCategories(selectedCategoryData.subcategories);
-          } else {
+          }else {
             setSubCategories([]);
           }
         })
@@ -136,6 +133,7 @@ export default function AddProduct() {
         });
     }
   }, [selectedState]);
+
 
   return (
     <div>
