@@ -154,8 +154,8 @@ app.post("/api/login", async (req, res) => {
     res.json({ token });
 
     res.status(200).json({ message: "Login successful" });
-  } catch (message) {
-    console.message("Error during signin:", message);
+  } catch (error) {
+    console.error("Error during signin:", error);
     //res.status(500).json({ message: 'Server error' });
   }
 });
