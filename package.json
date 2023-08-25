@@ -5,6 +5,7 @@
   "type": "module",
   "main": "./api/app.js",
   "scripts": {
+
     "start:frontend": "vite",
     "start:backend": "node ./api/app",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
@@ -19,7 +20,6 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.4.0",
     "chart.js": "^4.3.3",
-    "chat.js": "^1.0.2",
     "framer-motion": "^10.15.0",
     "react": "^18.2.0",
     "react-datepicker": "^4.16.0",
@@ -43,6 +43,6 @@
     "postcss": "^8.4.27",
     "react-router-dom": "^6.14.2",
     "tailwindcss": "^3.3.3",
-    "vite": "^4.4.5"
+    "vite": "^4.4.9"
   }
 }
